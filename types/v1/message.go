@@ -9,6 +9,7 @@ type Message interface {
 	GetContext() *Context
 	GetIntegrations() *Integrations
 	GetType() string
+	WithType(string)
 	WithSentAt(time.Time)
 	WithReceivedAt(time.Time)
 	WithRequestMetadata(RequestMetadata)

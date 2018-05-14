@@ -42,9 +42,14 @@ func (ev *Event) GetIntegrations() *Integrations {
 	return ev.Integrations
 }
 
-// GetType returns the write key
+// GetType returns the message's type
 func (ev *Event) GetType() string {
 	return ev.Type
+}
+
+// WithType sets the type
+func (ev *Event) WithType(t string) {
+	ev.Type = t
 }
 
 // WithSentAt sets the sentAt date

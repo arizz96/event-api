@@ -33,5 +33,7 @@ func NewMessage(kind string, raw []byte) (Message, error) {
 		return nil, err
 	}
 
+	msg.WithType(kind)
+
 	return msg, nil
 }
