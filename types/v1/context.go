@@ -102,7 +102,7 @@ type ReferrerInfo struct {
 
 // ScreenInfo provides the representation of the `context.screen` object
 type ScreenInfo struct {
-	Density int `json:"density,omitempty"`
-	Width   int `json:"width,omitempty"`
-	Height  int `json:"height,omitempty"`
+	Density float64 `json:"density,omitempty"`
+	Width   int     `json:"width,omitempty"`
+	Height  int     `json:"height,omitempty"`
 }
