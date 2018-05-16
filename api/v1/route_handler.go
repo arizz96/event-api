@@ -18,6 +18,22 @@ func NewRouteHandler(writer ingestion.MessageWriter) *RouteHandler {
 
 // Register registers the event handlers on the given router
 func (h *RouteHandler) Register(router *gin.Engine) {
+	v1CrossOriginResourceSharing := router.Group("v1").Use(limits.RequestSizeLimiter(15000))
+	{
+		v1CrossOriginResourceSharing.OPTIONS("t", h.crossOriginResourceSharingHandler)
+		v1CrossOriginResourceSharing.OPTIONS("track", h.crossOriginResourceSharingHandler)
+		v1CrossOriginResourceSharing.OPTIONS("p", h.crossOriginResourceSharingHandler)
+		v1CrossOriginResourceSharing.OPTIONS("page", h.crossOriginResourceSharingHandler)
+		v1CrossOriginResourceSharing.OPTIONS("a", h.crossOriginResourceSharingHandler)
+		v1CrossOriginResourceSharing.OPTIONS("alias", h.crossOriginResourceSharingHandler)
+		v1CrossOriginResourceSharing.OPTIONS("i", h.crossOriginResourceSharingHandler)
+		v1CrossOriginResourceSharing.OPTIONS("identify", h.crossOriginResourceSharingHandler)
+		v1CrossOriginResourceSharing.OPTIONS("g", h.crossOriginResourceSharingHandler)
+		v1CrossOriginResourceSharing.OPTIONS("group", h.crossOriginResourceSharingHandler)
+		v1CrossOriginResourceSharing.OPTIONS("batch", h.crossOriginResourceSharingHandler)
+		v1CrossOriginResourceSharing.OPTIONS("import", h.crossOriginResourceSharingHandler)
+	}
+
 	v1Single := router.Group("v1").Use(limits.RequestSizeLimiter(15000))
 	{
 		v1Single.POST("t", h.singleHandler("track"))
