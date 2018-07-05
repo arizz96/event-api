@@ -15,6 +15,15 @@ import (
 )
 
 func (h *RouteHandler) batchHandler(c *gin.Context) {
+	// Grab metadata from this request
+	metadata := v1types.NewRequestMetadata(c)
+
+	// Authorize request
+	if !v1types.Authorize(metadata.WriteKey) {
+		c.AbortWithStatusJSON(http.StatusUnauthorized, nil)
+		return
+	}
+
 	log := logging.GetLogger(logrus.Fields{"package": "v1"})
 	c.Set("method", "batch")
 
@@ -58,9 +67,6 @@ func (h *RouteHandler) batchHandler(c *gin.Context) {
 		c.AbortWithStatusJSON(http.StatusOK, returnJSON)
 		return
 	}
-
-	// Grab metadata from this request
-	metadata := v1types.NewRequestMetadata(c)
 
 	// Loop over this batches messages
 	for _, msg := range batch.Messages {

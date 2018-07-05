@@ -12,6 +12,15 @@ import (
 
 func (h *RouteHandler) singleHandler(kind string) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		// Grab metadata from this request
+		metadata := v1types.NewRequestMetadata(c)
+
+		// Authorize request
+		if !v1types.Authorize(metadata.WriteKey) {
+			c.AbortWithStatusJSON(http.StatusUnauthorized, nil)
+			return
+		}
+
 		log := logging.GetLogger(logrus.Fields{"package": "v1"})
 		c.Set("method", "single")
 
@@ -38,9 +47,6 @@ func (h *RouteHandler) singleHandler(kind string) gin.HandlerFunc {
 			c.AbortWithStatusJSON(http.StatusOK, returnJSON)
 			return
 		}
-
-		// Grab metadata from this request
-		metadata := v1types.NewRequestMetadata(c)
 
 		// Apply ReceivedAt date
 		msg.WithReceivedAt(time.Now().UTC())
