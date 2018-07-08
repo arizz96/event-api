@@ -16,6 +16,11 @@ RUN apk add --no-cache \
 		zlib-dev
 
 COPY . .
+RUN cd vendor/github.com/gin-contrib && \
+		git clone https://github.com/arizz96/cors.git && \
+		cd cors && \
+		git checkout 'feature/regexp-origin-match' && \
+		go build
 RUN make build
 
 ENV GIN_MODE=release
