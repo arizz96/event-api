@@ -52,6 +52,7 @@ func start(cmd *cobra.Command, args []string) {
 			APIPort:               config.AppConfig.APIPort,
 			AdminPort:             config.AppConfig.AdminPort,
 			GracefulShutdownDelay: config.AppConfig.GracefulShutdownDelay,
+			AllowedOrigins:        config.AppConfig.AllowedOrigins,
 		}
 
 		// Create the producer

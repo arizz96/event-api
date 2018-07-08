@@ -11,8 +11,11 @@ import (
 	"github.com/gin-contrib/pprof"
 
 	"github.com/arizz96/event-api/logging"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/sirupsen/logrus"
+
+	"strings"
 )
 
 // Server represents this server
@@ -33,6 +36,7 @@ type ServerConfig struct {
 	APIInterface          string
 	AdminInterface        string
 	GracefulShutdownDelay int
+	AllowedOrigins        string
 }
 
 // NewServer creates a new server
@@ -58,6 +62,13 @@ func NewServer(config *ServerConfig) *Server {
 		Addr:    s.config.AdminInterface + ":" + s.config.AdminPort,
 		Handler: s.adminRouter,
 	}
+
+	// Configure CORS on router
+	s.router.Use(cors.New(cors.Config{
+		AllowOrigins: strings.Split(config.AllowedOrigins, ","),
+		AllowMethods: []string{"PUT", "PATCH", "GET", "POST"},
+		AllowHeaders: []string{"Origin"},
+	}))
 
 	return s
 }
