@@ -67,7 +67,7 @@ func NewServer(config *ServerConfig) *Server {
 	s.router.Use(cors.New(cors.Config{
 		AllowOrigins: strings.Split(config.AllowedOrigins, ","),
 		AllowMethods: []string{"PUT", "PATCH", "GET", "POST"},
-		AllowHeaders: []string{"Origin"},
+		AllowHeaders: []string{"Authorization", "Content-Length", "Content-Type", "Origin"},
 	}))
 
 	return s
