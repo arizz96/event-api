@@ -1,7 +1,5 @@
 FROM golang:alpine
 
-ARG LIBRDKAFKA_VERSION="1.0.1-r1"
-
 ENV REPO="github.com/arizz96/event-api"
 WORKDIR /go/src/${REPO}
 
@@ -9,13 +7,24 @@ RUN apk add --no-cache \
 		build-base \
 		cyrus-sasl-dev \
 		git \
-		librdkafka-dev=${LIBRDKAFKA_VERSION} \
 		libressl \
 		openssl-dev \
 		yajl-dev \
-		zlib-dev
+		zlib-dev \
+		bash
 
 COPY . .
+
+RUN git clone https://github.com/edenhill/librdkafka.git && \
+		cd librdkafka && \
+		git checkout '0.11.1.x' && \
+		cp ../patch-librdkafka/src-cpp.Makefile src-cpp/Makefile && \
+		cp ../patch-librdkafka/src.Makefile src/Makefile && \
+		./configure --clean && \
+		./configure --prefix /usr && \
+		make && \
+		make install
+
 RUN cd vendor/github.com/gin-contrib && \
 		git clone https://github.com/arizz96/cors.git && \
 		cd cors && \
