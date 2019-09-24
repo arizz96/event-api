@@ -8,7 +8,7 @@ import (
 )
 
 // Format is ISO-8601 format
-const Format = "2006-01-02T15:04:05"
+const Format = "2006-01-02T15:04:05.045Z"
 const jsonFormat = `"` + Format + `"`
 
 // Timestamp represents an ISO-8601 date string
