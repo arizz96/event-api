@@ -1,6 +1,6 @@
 FROM golang:alpine
 
-ARG LIBRDKAFKA_VERSION="0.11.1-r1"
+ARG LIBRDKAFKA_VERSION="1.0.1-r1"
 
 ENV REPO="github.com/arizz96/event-api"
 WORKDIR /go/src/${REPO}
