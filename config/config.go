@@ -29,6 +29,7 @@ type Configuration struct {
 	FlushTimeout          int    `mapstructure:"FLUSH_TIMEOUT"`
 	QueueBufferingDelayMs int    `mapstructure:"QUEUE_BUFFERING_DELAY_MS"`
 	AuthorizedWriteKeys   string `mapstructure:"AUTHORIZED_WRITE_KEYS"`
+	AllowedOrigins        string `mapstructure:"ALLOWED_ORIGINS"`
 }
 
 func init() {
@@ -52,6 +53,7 @@ func init() {
 	appViper.SetDefault("FLUSH_TIMEOUT", 10000)
 	appViper.SetDefault("QUEUE_BUFFERING_DELAY_MS", 5000)
 	appViper.SetDefault("AUTHORIZED_WRITE_KEYS", "")
+	appViper.SetDefault("ALLOWED_ORIGINS", "")
 
 	if err := appViper.Unmarshal(AppConfig); err != nil {
 		log.Fatalf("Unable to decode into struct, %v", err)
