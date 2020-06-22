@@ -8,18 +8,18 @@ import (
 
 // Event contains the common fields in all events.
 type Event struct {
-	AnonymousID       string        `json:"anonymousId,omitempty"`
-	Context           *Context      `json:"context,omitempty"`
-	Integrations      *Integrations `json:"integrations,omitempty"`
-	MessageID         string        `json:"messageId,omitempty"`
-	OriginalTimestamp Timestamp     `json:"originalTimestamp,omitempty"`
-	ReceivedAt        Timestamp     `json:"receivedAt,omitempty"`
-	SentAt            Timestamp     `json:"sentAt,omitempty"`
-	Timestamp         Timestamp     `json:"timestamp,omitempty"`
-	Type              string        `json:"type,omitempty"`
-	UserID            string        `json:"userId,omitempty"`
-	Version           string        `json:"version,omitempty"`
-	WriteKey          string        `json:"writeKey,omitempty"`
+	AnonymousID       string                  `json:"anonymousId,omitempty"`
+	Context           *Context                `json:"context,omitempty"`
+	Integrations      *Integrations           `json:"integrations,omitempty"`
+	MessageID         string                  `json:"messageId,omitempty"`
+	OriginalTimestamp Timestamp               `json:"originalTimestamp,omitempty"`
+	ReceivedAt        Timestamp               `json:"receivedAt,omitempty"`
+	SentAt            Timestamp               `json:"sentAt,omitempty"`
+	Timestamp         Timestamp               `json:"timestamp,omitempty"`
+	Type              string                  `json:"type,omitempty"`
+	UserID            types.ConvertibleString `json:"userId,omitempty"`
+	Version           string                  `json:"version,omitempty"`
+	WriteKey          string                  `json:"writeKey,omitempty"`
 }
 
 // GetWriteKey returns the write key
