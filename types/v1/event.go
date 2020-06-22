@@ -2,7 +2,7 @@ package v1
 
 import (
 	"time"
-
+	"github.com/arizz96/event-api/types"
 	"github.com/imdario/mergo"
 )
 
